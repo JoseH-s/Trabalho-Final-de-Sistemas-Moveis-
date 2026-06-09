@@ -14,7 +14,6 @@ class DataAccessObject {
     """);
   }
 
-  // abre o banco (cria a tabela na primeira execução)
   static Future<sql.Database> db() async {
     return sql.openDatabase(
       "pomodoro.db",
@@ -25,21 +24,18 @@ class DataAccessObject {
     );
   }
 
-  // C: Create (inclui uma sessão de pomodoro)
   static Future<int> incluirRegistro(Registro registro) async {
     final db = await DataAccessObject.db();
     final idIncluido = await db.insert("registros", registro.toMap());
     return idIncluido;
   }
 
-  // R: Read (retorna todas as sessões, mais recentes primeiro)
   static Future<List<Registro>> obterRegistros() async {
     final db = await DataAccessObject.db();
     final mapas = await db.query("registros", orderBy: "data_hora DESC");
     return mapas.map((map) => Registro.fromMap(map)).toList();
   }
 
-  // D: Delete (exclui uma única sessão pelo seu id)
   static Future<bool> excluirRegistro(Registro registro) async {
     final db = await DataAccessObject.db();
     try {
@@ -51,7 +47,6 @@ class DataAccessObject {
     }
   }
 
-  // D: Delete (limpa todo o histórico)
   static Future<bool> limparHistorico() async {
     final db = await DataAccessObject.db();
     try {

@@ -28,16 +28,19 @@ class TelaCronometro extends StatelessWidget {
     }
   }
 
-  Widget _contador(BuildContext context, String titulo, int segundos,
-      IconData icone, Color cor, bool ativo) {
+  Widget _contador(
+    BuildContext context,
+    String titulo,
+    int segundos,
+    IconData icone,
+    Color cor,
+    bool ativo,
+  ) {
     return Card(
       elevation: ativo ? 6 : 1,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: BorderSide(
-          color: ativo ? cor : Colors.transparent,
-          width: 2,
-        ),
+        side: BorderSide(color: ativo ? cor : Colors.transparent, width: 2),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
@@ -114,7 +117,6 @@ class TelaCronometro extends StatelessWidget {
   Widget _botoes(BuildContext context, PomodoroProvider provider) {
     final estado = provider.estado;
 
-    // Botão principal muda conforme o estado.
     Widget botaoPrincipal;
     if (estado == EstadoPomodoro.trabalhando) {
       botaoPrincipal = FilledButton.icon(
