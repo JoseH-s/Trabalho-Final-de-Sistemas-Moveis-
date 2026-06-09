@@ -1,6 +1,6 @@
 class Registro {
   int id;
-  String dataHora; // data/hora da sessão em formato ISO 8601
+  String dataHora;
   int segundosTrabalho;
   int segundosDescanso;
 
